@@ -18,15 +18,21 @@ public class Generics {
         gen.printObject(second);
         gen.printObject(third);
         System.out.println();
-
-//        gen.printBoundedWildCard(first);
+/*
+        gen.printBoundedWildCard(first);
+ Строка вызовет ошибку компиляции, поскольку класс Animal
+ выходит за ограничение сверху (Predator).
+*/
         gen.printBoundedWildCard(second);
         gen.printBoundedWildCard(third);
         System.out.println();
 
         gen.printLowerBoundedWildCard(first);
         gen.printLowerBoundedWildCard(second);
-//        gen.printLowerBoundedWildCard(third);
+/*      gen.printLowerBoundedWildCard(third);
+ Строка вызовет ошибку компиляции, поскольку класс Tiger
+ выходит за ограничение снизу (Predator).
+ */
     }
 
     public void printObject(List<?> list) {
