@@ -105,7 +105,7 @@ class SimpleLinkedListTest {
         Iterator<Integer> iterator = list.iterator();
         assertThat(iterator.next()).isEqualTo(1);
         assertThat(iterator.next()).isEqualTo(2);
-        assertThat(iterator.next())
+        assertThatThrownBy(iterator::next)
                 .isInstanceOf(NoSuchElementException.class);
     }
 }
