@@ -1,4 +1,4 @@
-package collection;
+package ru.job4j.collection;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

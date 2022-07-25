@@ -1,4 +1,4 @@
-package generics;
+package ru.job4j.generics;
 
 public abstract class Base {
     private final String id;
