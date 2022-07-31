@@ -179,7 +179,7 @@ class SimpleMapTest {
         map.put(null, "Nemo");
         Iterator<Integer> it = map.iterator();
         assertThat(it.hasNext()).isTrue();
-        assertThat(it.next()).isEqualTo(0);
+        assertThat(it.next()).isEqualTo(null);
         assertThat(it.hasNext()).isTrue();
         map.remove(1);
         assertThatThrownBy(it::hasNext).isInstanceOf(ConcurrentModificationException.class);
