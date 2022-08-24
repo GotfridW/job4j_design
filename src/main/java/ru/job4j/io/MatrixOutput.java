@@ -1,7 +1,6 @@
 package ru.job4j.io;
 
 import java.io.FileOutputStream;
-import java.util.Arrays;
 
 public class MatrixOutput {
     public static void main(String[] args) {
@@ -13,7 +12,10 @@ public class MatrixOutput {
         }
         try (FileOutputStream out = new FileOutputStream("Matrix.txt")) {
             for (int[] i : array) {
-                out.write(Arrays.toString(i).getBytes());
+                for (int num : i) {
+                    out.write(String.valueOf(num).getBytes());
+                    out.write(" ".getBytes());
+                }
                 out.write(System.lineSeparator().getBytes());
             }
         } catch (Exception e) {
