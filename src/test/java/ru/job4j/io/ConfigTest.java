@@ -35,6 +35,16 @@ class ConfigTest {
     }
 
     @Test
+    void whenLineWithoutKeyThenThrowException() {
+        String path = "./data/line_without_key.properties";
+        String s = "=black";
+        Config cfg = new Config(path);
+        assertThatThrownBy(cfg::load).isInstanceOf(IllegalArgumentException.class)
+                .hasMessageMatching("^.+$")
+                .hasMessageContaining("Incorrect", s);
+    }
+
+    @Test
     void whenLineWithoutValueThenThrowException() {
         String path = "./data/line_without_value.properties";
         Config cfg = new Config(path);
@@ -43,6 +53,13 @@ class ConfigTest {
                 .hasMessageContaining("Incorrect");
         assertThat(cfg.value("shape")).isNotNull()
                 .isEqualTo("circle");
+    }
+
+    @Test
+    void whenLineWithoutBothKeyAndValueThenThrowException() {
+        String path = "./data/line_without_both_key_and_value.properties";
+        Config cfg = new Config(path);
+        assertThatThrownBy(cfg::load).isInstanceOf(IllegalArgumentException.class);
     }
 
     @Test
