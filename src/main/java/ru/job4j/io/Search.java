@@ -14,8 +14,22 @@ public class Search {
         return searcher.getPaths();
     }
 
+    private static void checkArgument(String[] args) {
+        if (args.length != 2) {
+            throw new IllegalArgumentException("2 arguments required!");
+        }
+        Path path = Paths.get(args[0]);
+        if (!(Files.exists(path) && Files.isDirectory(path))) {
+            throw new IllegalArgumentException("Path not defined: " + path);
+        }
+        if (!args[1].startsWith(".")) {
+            throw new IllegalArgumentException("Extension not defined: " + args[1]);
+        }
+    }
+
     public static void main(String[] args) throws IOException {
-        Path start = Paths.get(".");
-        search(start, p -> p.toFile().getName().endsWith(".java")).forEach(System.out::println);
+        checkArgument(args);
+        Path start = Paths.get(args[0]);
+        search(start, p -> p.toFile().getName().endsWith(args[1])).forEach(System.out::println);
     }
 }
