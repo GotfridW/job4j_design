@@ -8,7 +8,7 @@ public class ArgsName {
 
     public String get(String key) {
         if (!values.containsKey(key)) {
-            throw new IllegalArgumentException("Invalid key");
+            throw new IllegalArgumentException(String.format("Invalid key: %s", key));
         }
         return values.get(key);
     }
@@ -23,8 +23,8 @@ public class ArgsName {
 
     private static void validate(String arg) {
         if (!arg.matches("^-.+=.+$")) {
-            throw new IllegalArgumentException(
-                    "Parameter must follow the format \"-key=value\"");
+            throw new IllegalArgumentException(String.format(
+                    "Parameter must follow the format \"-key=value\", but was: %s", arg));
         }
     }
 

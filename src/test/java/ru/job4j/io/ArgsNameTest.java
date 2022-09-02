@@ -27,7 +27,7 @@ class ArgsNameTest {
     void whenGetNotExist() {
         ArgsName jvm = ArgsName.of(new String[]{"-Xmx=512"});
         assertThatThrownBy(() -> jvm.get("Xms")).isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining("Invalid key");
+                .hasMessageContaining("Xms");
     }
 
     @Test
@@ -41,20 +41,20 @@ class ArgsNameTest {
     void whenNoKey() {
         assertThatThrownBy(() -> ArgsName.of(new String[]{"-=256"}))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining("format");
+                .hasMessageContaining("-=256");
     }
 
     @Test
     void whenNoEqualsSymbol() {
         assertThatThrownBy(() -> ArgsName.of(new String[]{"-request:Exit"}))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining("format");
+                .hasMessageContaining("-request:Exit");
     }
 
     @Test
     void whenNoDashSymbol() {
         assertThatThrownBy(() -> ArgsName.of(new String[]{"encoding=UTF-8"}))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining("format");
+                .hasMessageContaining("encoding=UTF-8");
     }
 }
