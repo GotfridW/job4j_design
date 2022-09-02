@@ -20,16 +20,19 @@ public class Search {
         }
         Path path = Paths.get(args[0]);
         if (!(Files.exists(path) && Files.isDirectory(path))) {
-            throw new IllegalArgumentException("Path not defined: " + path);
+            throw new IllegalArgumentException(
+                    String.format("Path not defined: %s", path));
         }
         if (!args[1].startsWith(".")) {
-            throw new IllegalArgumentException("Extension not defined: " + args[1]);
+            throw new IllegalArgumentException(
+                    String.format("Extension not defined: %s", args[1]));
         }
     }
 
     public static void main(String[] args) throws IOException {
         checkArgument(args);
         Path start = Paths.get(args[0]);
-        search(start, p -> p.toFile().getName().endsWith(args[1])).forEach(System.out::println);
+        search(start, p -> p.toFile().getName().endsWith(args[1]))
+                .forEach(System.out::println);
     }
 }
