@@ -14,26 +14,24 @@ public class ArgsName {
     }
 
     private void parse(String[] args) {
-        validate(args);
         for (String arg : args) {
+            validate(arg);
             var parameter = arg.substring(1).split("=", 2);
             values.put(parameter[0], parameter[1]);
         }
     }
 
-    private static void validate(String[] args) {
-        if (args.length == 0) {
-            throw new IllegalArgumentException("Couldn't detect any parameters");
-        }
-        for (var arg : args) {
-            if (!arg.matches("^-.+=.+$")) {
-                throw new IllegalArgumentException(
-                        "Parameter must follow the format \"-key=value\"");
-            }
+    private static void validate(String arg) {
+        if (!arg.matches("^-.+=.+$")) {
+            throw new IllegalArgumentException(
+                    "Parameter must follow the format \"-key=value\"");
         }
     }
 
     public static ArgsName of(String[] args) {
+        if (args.length == 0) {
+            throw new IllegalArgumentException("Couldn't detect any parameters");
+        }
         var names = new ArgsName();
         names.parse(args);
         return names;
