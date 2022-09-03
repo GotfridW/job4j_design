@@ -25,7 +25,8 @@ public class Config {
                         if (!s.contains("=") || s.startsWith("=")
                                 || s.split("=", 2)[1].equals("")
                                 || s.matches("^=$")) {
-                            throw new IllegalArgumentException("Incorrect parameter format of: " + s);
+                            throw new IllegalArgumentException(String.format(
+                                    "Incorrect parameter format of: %s", s));
                         }
                         values.put(s.split("=", 2)[0], s.split("=", 2)[1]);
                     });
@@ -36,7 +37,7 @@ public class Config {
 
     public String value(String key) {
         if (!values.containsKey(key)) {
-            throw new NoSuchElementException("Invalid key: " + key);
+            throw new NoSuchElementException(String.format("Invalid key: %s", key));
         }
         return values.get(key);
     }

@@ -14,7 +14,7 @@ public class Search {
         return searcher.getPaths();
     }
 
-    private static void checkArgument(String[] args) {
+    static void checkArgument(String[] args) {
         if (args.length != 2) {
             throw new IllegalArgumentException("2 arguments required!");
         }
