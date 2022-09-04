@@ -25,14 +25,17 @@ public class Zip {
         }
     }
 
+    private void validate(ArgsName args) {
+        String[] arr = new String[] {args.get("d"), args.get("e"), args.get("o")};
+        Search.checkArgument(new String[] {arr[0], arr[1]});
+    }
     public static void main(String[] args) throws IOException {
         Zip zip = new Zip();
         var params = ArgsName.of(args);
-        String[] arr = new String[] {params.get("d"), params.get("e"), params.get("o")};
-        Search.checkArgument(new String[] {arr[0], arr[1]});
-        Path path = Paths.get(arr[0]);
-        Predicate<Path> pred = p -> !p.getFileName().endsWith(arr[1]);
+        zip.validate(params);
+        Path path = Paths.get(params.get("d"));
+        Predicate<Path> pred = p -> !p.getFileName().endsWith(params.get("e"));
         var paths = Search.search(path, pred);
-        zip.packFiles(paths, new File(arr[2]));
+        zip.packFiles(paths, new File(params.get("o")));
     }
 }
