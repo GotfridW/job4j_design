@@ -1,6 +1,7 @@
 package ru.job4j.io;
 
 import java.io.*;
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
@@ -27,8 +28,21 @@ public class Zip {
 
     private void validate(ArgsName args) {
         String[] arr = new String[] {args.get("d"), args.get("e"), args.get("o")};
-        Search.checkArgument(new String[] {arr[0], arr[1]});
+        Path path = Paths.get(arr[0]);
+        if (!(Files.exists(path) && Files.isDirectory(path))) {
+            throw new IllegalArgumentException(
+                    String.format("Path not defined: %s", path));
+        }
+        if (!arr[1].startsWith(".")) {
+            throw new IllegalArgumentException(
+                    String.format("Exclusion not defined: %s", arr[1]));
+        }
+        if (!arr[2].matches("^.+\\..+$")) {
+            throw new IllegalArgumentException(
+                    String.format("Target file not defined: %s", arr[2]));
+        }
     }
+
     public static void main(String[] args) throws IOException {
         Zip zip = new Zip();
         var params = ArgsName.of(args);
