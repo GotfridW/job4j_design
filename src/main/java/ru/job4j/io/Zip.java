@@ -27,19 +27,18 @@ public class Zip {
     }
 
     private void validate(ArgsName args) {
-        String[] arr = new String[] {args.get("d"), args.get("e"), args.get("o")};
-        Path path = Paths.get(arr[0]);
+        Path path = Paths.get(args.get("d"));
         if (!(Files.exists(path) && Files.isDirectory(path))) {
             throw new IllegalArgumentException(
                     String.format("Path not defined: %s", path));
         }
-        if (!arr[1].startsWith(".")) {
+        if (!args.get("e").startsWith(".")) {
             throw new IllegalArgumentException(
-                    String.format("Exclusion not defined: %s", arr[1]));
+                    String.format("Exclusion not defined: %s", args.get("e")));
         }
-        if (!arr[2].matches("^.+\\..+$")) {
+        if (!args.get("o").endsWith(".zip")) {
             throw new IllegalArgumentException(
-                    String.format("Target file not defined: %s", arr[2]));
+                    String.format("Target file must be in zip format but was: %s", args.get("o")));
         }
     }
 
