@@ -4,7 +4,6 @@ import java.io.*;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 import java.util.Scanner;
 
 public class ConsoleChat {
@@ -21,25 +20,25 @@ public class ConsoleChat {
     }
 
     public void run() {
+        var phrases = readPhrases();
         var sc = new Scanner(System.in);
         System.out.println("Введите сообщение:");
-        String msg = sc.nextLine();
-        chatLog.add(msg);
-        switch (msg) {
-            case STOP -> stopLoop();
-            case OUT -> {
-                saveLog(chatLog);
-                System.exit(0);
+        String msg;
+        do {
+            msg = sc.nextLine();
+            chatLog.add(msg);
+            if (STOP.equals(msg)) {
+                stopLoop();
+                reply(phrases);
+            } else {
+                reply(phrases);
             }
-            default -> reply();
-        }
-        run();
+        } while (!OUT.equals(msg));
+        saveLog(chatLog);
     }
 
-    private void reply() {
-        var phrases = readPhrases();
-        var r = new Random();
-        String answer = phrases.get(r.nextInt(phrases.size()));
+    private void reply(List<String> phrases) {
+        String answer = phrases.get((int) (Math.random() * (phrases.size())));
         chatLog.add(answer);
         System.out.println(answer);
     }
@@ -51,7 +50,6 @@ public class ConsoleChat {
         do {
             input = sc.nextLine();
         } while (!CONTINUE.equals(input));
-        reply();
     }
 
     private List<String> readPhrases() {
