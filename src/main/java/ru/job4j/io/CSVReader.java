@@ -17,7 +17,7 @@ public class CSVReader {
         String filter = argsName.get("filter");
 
         try (var scanner = new Scanner(new FileInputStream(argsName.get("path")));
-             var output = out.equals("stdout")
+             var output = "stdout".equals(out)
                      ? new PrintStream(System.out)
                      : new PrintStream(new FileOutputStream(out))) {
              scanner.useDelimiter(System.lineSeparator());
@@ -73,8 +73,7 @@ public class CSVReader {
             throw new IllegalArgumentException(String.format(
                     "Args must include 4 arguments but was: %s", args.length));
         }
-        var argsName = ArgsName.of(new String[] {
-                args[0], args[1], args[2], args[3]});
+        var argsName = ArgsName.of(args);
         handle(argsName);
     }
 }
