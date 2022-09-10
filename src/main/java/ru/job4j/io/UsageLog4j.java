@@ -3,6 +3,9 @@ package ru.job4j.io;
 import org.slf4j.LoggerFactory;
 import org.slf4j.Logger;
 
+import java.time.LocalDateTime;
+import java.util.TimeZone;
+
 public class UsageLog4j {
     private static final Logger LOG = LoggerFactory.getLogger(UsageLog4j.class.getName());
 
@@ -19,6 +22,7 @@ public class UsageLog4j {
         byte status = 2;
         LOG.warn("Warning: current status : {}", status);
         char code = 'F';
-        LOG.error("Error occurred! Code: {}", code);
+        long time = System.currentTimeMillis();
+        LOG.error("Error occurred: code: {}, at: {}", code, time);
     }
 }
