@@ -1,0 +1,9 @@
+<?xml version="1.1" encoding="UTF-8" ?>
+<laptop brand="Asus" cores="2" wifi="true">
+    <display size="15.6" ratio="16:9" resolution="1366x768"/>
+    <ports>
+        <status>USB</status>
+        <status>HDMI</status>
+        <status>CardReader</status>
+    </ports>
+</laptop>
