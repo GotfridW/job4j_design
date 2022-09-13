@@ -21,6 +21,26 @@ public class Laptop {
         this.ports = ports;
     }
 
+    public String getBrand() {
+        return brand;
+    }
+
+    public int getCores() {
+        return cores;
+    }
+
+    public boolean isWifi() {
+        return wifi;
+    }
+
+    public Display getDisplay() {
+        return display;
+    }
+
+    public String[] getPorts() {
+        return ports;
+    }
+
     @Override
     public String toString() {
         return "Laptop{"

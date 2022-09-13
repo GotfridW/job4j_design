@@ -12,6 +12,18 @@ public class Display {
         this.resolution = resolution;
     }
 
+    public double getSize() {
+        return size;
+    }
+
+    public String getRatio() {
+        return ratio;
+    }
+
+    public String getResolution() {
+        return resolution;
+    }
+
     @Override
     public String toString() {
         return "Display{"
