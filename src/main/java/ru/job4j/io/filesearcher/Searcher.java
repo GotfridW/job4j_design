@@ -6,6 +6,7 @@ import java.io.PrintWriter;
 import java.nio.file.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Predicate;
 
 public class Searcher {
     private final List<Path> files = new ArrayList<>();
@@ -18,13 +19,13 @@ public class Searcher {
         String pattern = params.get("t");
         Path out = Paths.get(params.get("o"));
         if ("mask".equals(pattern)) {
-            searchByGlob(path, key);
+            var matcher = FileSystems.getDefault().getPathMatcher("glob:" + key);
+            search(path, matcher::matches);
         } else if ("name".equals(pattern)) {
-            searchByName(path, key);
+            search(path, p -> key.equalsIgnoreCase(p.toFile().getName()));
         } else {
-            searchByRegex(path, key);
+            search(path, p -> p.toFile().toString().matches(key));
         }
-
         if (files.isEmpty()) {
             System.out.println("No files found");
         } else {
@@ -32,21 +33,8 @@ public class Searcher {
         }
     }
 
-    private void searchByGlob(Path path, String glob) throws IOException {
-        var matcher = FileSystems.getDefault().getPathMatcher("glob:" + glob);
-        var searcher = new SearchFiles(matcher::matches);
-        Files.walkFileTree(path, searcher);
-        files.addAll(searcher.getPaths());
-    }
-
-    private void searchByName(Path path, String name) throws IOException {
-        var searcher = new SearchFiles(p -> name.equalsIgnoreCase(p.toFile().getName()));
-        Files.walkFileTree(path, searcher);
-        files.addAll(searcher.getPaths());
-    }
-
-    private void searchByRegex(Path path, String regex) throws IOException {
-        var searcher = new SearchFiles(p -> p.toFile().toString().matches(regex));
+    private void search(Path path, Predicate<Path> predicate) throws IOException {
+        var searcher = new SearchFiles(predicate);
         Files.walkFileTree(path, searcher);
         files.addAll(searcher.getPaths());
     }
