@@ -24,4 +24,5 @@ select * from fuel;
 release point_2;
 rollback to point_1;
 select * from fuel;
+commit;
 
