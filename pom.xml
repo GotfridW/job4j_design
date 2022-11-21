@@ -35,7 +35,7 @@
   <dependency>
     <groupId>org.junit.jupiter</groupId>
     <artifactId>junit-jupiter-engine</artifactId>
-    <version>5.8.2</version>
+    <version>5.9.0</version>
     <scope>test</scope>
   </dependency>
   <dependency>
@@ -47,7 +47,7 @@
     <dependency>
       <groupId>org.junit.jupiter</groupId>
       <artifactId>junit-jupiter-params</artifactId>
-      <version>5.8.2</version>
+      <version>5.9.0</version>
       <scope>test</scope>
     </dependency>
     <dependency>
@@ -85,6 +85,12 @@
       <artifactId>json</artifactId>
       <version>20200518</version>
     </dependency>
+    <dependency>
+      <groupId>org.postgresql</groupId>
+      <artifactId>postgresql</artifactId>
+      <version>42.5.0</version>
+    </dependency>
+
   </dependencies>
 
   <build>
