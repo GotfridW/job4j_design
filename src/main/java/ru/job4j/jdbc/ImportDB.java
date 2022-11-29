@@ -14,7 +14,7 @@ import java.util.stream.Collectors;
 
 public class ImportDB {
     private Properties cfg;
-    String dump;
+    private String dump;
 
     public ImportDB(Properties cfg, String dump) {
         this.cfg = cfg;
