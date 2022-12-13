@@ -40,7 +40,7 @@ insert into person (id, name, company_id) values (17, 'Ian', 6);
 insert into person (id, name, company_id) values (18, 'Victor', 6);
 
 
--- Имена всех person, которые не состоят в компании с id=5
+-- РРјРµРЅР° РІСЃРµС… person, РЅРµ СЃРѕСЃС‚РѕСЏС‰РёС… РІ РєРѕРјРїР°РЅРёРё СЃ id=5
 
 select p.name as employee_name, c.name as company
 from person p join company c
@@ -48,7 +48,7 @@ on c.id = p.company_id
 where c.id != 5;
 
 
---Название(я) компании(й) с максимальным количеством персонала
+-- РќР°Р·РІР°РЅРёРµ(СЏ) РєРѕРјРїР°РЅРёРё(Р№) СЃ РјР°РєСЃРёРјР°Р»СЊРЅС‹Рј РєРѕР»РёС‡РµСЃС‚РІРѕРј РїРµСЂСЃРѕРЅР°Р»Р°
 
 select c.name as company, count(*) as staff_quantity
 from company c
