@@ -15,7 +15,7 @@ class StringGeneratorTest {
     private final String template = "I am a ${name}, Who are ${subject}? ";
 
     @Test
-    void check() {
+    void whenPassNameAndSubjectThenReturnString() {
         Map<String, String> args = new HashMap<>();
         args.put("name", "Mike Wazowski");
         args.put("subject", "you");
