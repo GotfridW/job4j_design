@@ -1,5 +1,6 @@
 package ru.job4j.ood.srp.report;
 
+import lombok.AllArgsConstructor;
 import ru.job4j.ood.srp.model.Employee;
 import ru.job4j.ood.srp.store.Store;
 
@@ -7,15 +8,11 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.function.Predicate;
 
+@AllArgsConstructor
 public class HRReport implements Report {
     private static final String SEPARATOR = System.lineSeparator();
     private final Store store;
     private final Comparator<Employee> comparator;
-
-    public HRReport(Store store, Comparator<Employee> comparator) {
-        this.store = store;
-        this.comparator = comparator;
-    }
 
     @Override
     public String generate(Predicate<Employee> filter) {

@@ -1,5 +1,6 @@
 package ru.job4j.ood.srp.report;
 
+import lombok.AllArgsConstructor;
 import ru.job4j.ood.srp.formatter.DateTimeParser;
 import ru.job4j.ood.srp.model.Employee;
 import ru.job4j.ood.srp.store.Store;
@@ -7,15 +8,11 @@ import ru.job4j.ood.srp.store.Store;
 import java.util.Calendar;
 import java.util.function.Predicate;
 
+@AllArgsConstructor
 public class ITReport implements Report {
     private static final String SEPARATOR = System.lineSeparator();
     private final Store store;
     private final DateTimeParser<Calendar> parser;
-
-    public ITReport(Store store, DateTimeParser<Calendar> parser) {
-        this.store = store;
-        this.parser = parser;
-    }
 
     @Override
     public String generate(Predicate<Employee> filter) {
