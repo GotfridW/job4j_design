@@ -20,7 +20,8 @@ public class JsonReport implements Report {
 
     @Override
     public String generate(Predicate<Employee> filter) {
-        return builder.registerTypeAdapter(Calendar.class, new CalendarJsonAdapter())
+        return builder.setPrettyPrinting()
+                .registerTypeAdapter(Calendar.class, new CalendarJsonAdapter())
                 .registerTypeAdapter(GregorianCalendar.class, new CalendarJsonAdapter())
                 .create()
                 .toJson(store.findBy(filter));

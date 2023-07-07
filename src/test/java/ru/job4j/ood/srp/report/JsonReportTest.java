@@ -21,16 +21,21 @@ class JsonReportTest {
         store.add(employeeOne);
         store.add(employeeTwo);
         Report engine = new JsonReport(store);
-        String expected = "["
-                + "{\"name\":\"Bill\","
-                + "\"hired\":\"13:06:2020 00:00\","
-                + "\"fired\":\"31:12:2022 00:00\","
-                + "\"salary\":100.0},"
-                + "{\"name\":\"Tom\","
-                + "\"hired\":\"13:06:2020 00:00\","
-                + "\"fired\":\"31:12:2022 00:00\","
-                + "\"salary\":150.0}"
-                + "]";
+        String expected = """
+                [
+                  {
+                    "name": "Bill",
+                    "hired": "13:06:2020 00:00",
+                    "fired": "31:12:2022 00:00",
+                    "salary": 100.0
+                  },
+                  {
+                    "name": "Tom",
+                    "hired": "13:06:2020 00:00",
+                    "fired": "31:12:2022 00:00",
+                    "salary": 150.0
+                  }
+                ]""";
         assertThat(engine.generate(emp -> true)).isEqualTo(expected);
     }
 }
