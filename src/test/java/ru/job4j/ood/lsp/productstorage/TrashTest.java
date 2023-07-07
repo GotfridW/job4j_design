@@ -10,14 +10,14 @@ import ru.job4j.ood.lsp.productstorage.store.Store;
 import ru.job4j.ood.lsp.productstorage.store.Trash;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 import static org.assertj.core.api.Assertions.*;
 
 class TrashTest {
     @Test
     void add() {
-        ExpirationCalculator calculator = new FoodExpirationCalculator();
-        Store trash = new Trash(calculator);
+        Store trash = new Trash();
         LocalDateTime now = LocalDateTime.now();
         Food productExp50 = new Bacon(
                 "Bacon", now.minusDays(5), now.plusDays(5), 250, 50);
@@ -25,9 +25,11 @@ class TrashTest {
                 "Milk", now.minusDays(7), now, 70, 30);
         Food productExpTotally = new Bacon(
                 "Bacon", now.minusDays(15), now.minusDays(2), 250, 50);
-        trash.add(productExp50);
-        trash.add(productExpLastDay);
-        trash.add(productExpTotally);
+        ExpirationCalculator calculator = new FoodExpirationCalculator();
+        List<Food> productList = List.of(productExp50, productExpLastDay, productExpTotally);
+        for (Food product : productList) {
+            trash.add(calculator.calculate(product, now));
+        }
         assertThat(trash.getStock()).hasSize(1)
                 .contains(productExpTotally);
     }

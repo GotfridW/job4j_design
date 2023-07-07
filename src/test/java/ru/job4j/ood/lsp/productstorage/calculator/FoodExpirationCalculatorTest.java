@@ -23,7 +23,7 @@ class FoodExpirationCalculatorTest {
     void whenProductWithInvalidCreateDateThenException() {
         Food product = new Milk(
                 "Milk", NOW.plusDays(2), NOW.plusDays(10), 50, 20);
-        assertThatThrownBy(() -> calculator.calculate(product))
+        assertThatThrownBy(() -> calculator.calculate(product, NOW))
                 .isInstanceOf(IllegalArgumentException.class)
                 .message()
                 .isNotEmpty();
@@ -33,7 +33,7 @@ class FoodExpirationCalculatorTest {
     void whenProductWithInvalidExpiryDateThenException() {
         Food product = new Milk(
                 "Milk", NOW.minusDays(5), NOW.minusDays(10), 50, 20);
-        assertThatThrownBy(() -> calculator.calculate(product))
+        assertThatThrownBy(() -> calculator.calculate(product, NOW))
                 .isInstanceOf(IllegalArgumentException.class)
                 .message()
                 .isNotEmpty();
@@ -44,6 +44,7 @@ class FoodExpirationCalculatorTest {
         Food product = new Milk(
                 "Milk", NOW.minusDays(5), NOW.plusDays(5), 50, 20);
         float expected = 50.0f;
-        assertThat(calculator.calculate(product)).isEqualTo(expected);
+        calculator.calculate(product, NOW);
+        assertThat(product.getExpiryLevel()).isEqualTo(expected);
     }
 }

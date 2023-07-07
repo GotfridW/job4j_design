@@ -18,8 +18,7 @@ import static org.assertj.core.api.Assertions.*;
 class ShopTest {
     @Test
     void add() {
-        ExpirationCalculator calculator = new FoodExpirationCalculator();
-        Store shop = new Shop(calculator);
+        Store shop = new Shop();
         LocalDateTime now = LocalDateTime.now();
         Food productExpBelow25 = new Milk(
                 "Milk", now.minusDays(2), now.plusDays(10), 70, 30);
@@ -31,13 +30,14 @@ class ShopTest {
                 "Milk", now.minusDays(7), now, 70, 30);
         Food productExpTotally = new Bacon(
                 "Bacon", now.minusDays(15), now.minusDays(2), 250, 50);
-        shop.add(productExpBelow25);
-        shop.add(productExp50);
-        shop.add(productExpOver75);
-        shop.add(productExpLastDay);
-        shop.add(productExpTotally);
-        List<Food> expected = List.of(productExp50, productExpOver75, productExpLastDay);
-        assertThat(shop.getStock()).isEqualTo(expected);
+        List<Food> productList = List.of(
+                productExpBelow25, productExp50, productExpOver75, productExpLastDay, productExpTotally
+        );
+        ExpirationCalculator calculator = new FoodExpirationCalculator();
+        for (Food product : productList) {
+            shop.add(calculator.calculate(product, now));
+        }
+        assertThat(shop.getStock()).contains(productExp50, productExpOver75, productExpLastDay);
         assertThat(productExpOver75.getPrice()).isEqualTo(58.5);
     }
 

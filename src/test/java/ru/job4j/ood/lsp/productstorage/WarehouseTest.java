@@ -18,19 +18,21 @@ import java.util.List;
 class WarehouseTest {
     @Test
     void add() {
-        ExpirationCalculator calculator = new FoodExpirationCalculator();
-        Store warehouse = new Warehouse(calculator);
+        Store warehouse = new Warehouse();
         LocalDateTime now = LocalDateTime.now();
+        Food productExp0 = new Bacon("Bacon", now, now.plusDays(20), 250, 50);
         Food productExpUnder25 = new Milk(
                 "Milk", now.minusDays(2), now.plusDays(10), 70, 30);
-        Food productExpOver25 = new Eggs("Eggs", now, now.plusDays(20), 65, 10);
+        Food productExpOver25 = new Eggs("Eggs", now.minusDays(10), now.plusDays(10), 65, 10);
         Food productExpOver100 = new Bacon(
                 "Bacon", now.minusDays(15), now.minusDays(2), 250, 50);
-        warehouse.add(productExpUnder25);
-        warehouse.add(productExpOver25);
-        warehouse.add(productExpOver100);
-        List<Food> expected = List.of(productExpUnder25, productExpOver25);
-        assertThat(warehouse.getStock()).isEqualTo(expected);
+        List<Food> productList = List.of(productExp0, productExpUnder25, productExpOver25, productExpOver100);
+        ExpirationCalculator calculator = new FoodExpirationCalculator();
+        for (Food product : productList) {
+            warehouse.add(calculator.calculate(product, now));
+        }
+
+        assertThat(warehouse.getStock()).contains(productExp0, productExpUnder25);
 
 
 

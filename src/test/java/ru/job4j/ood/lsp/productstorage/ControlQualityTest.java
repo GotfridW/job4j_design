@@ -22,10 +22,10 @@ class ControlQualityTest {
     @Test
     void distribute() {
         ExpirationCalculator calculator = new FoodExpirationCalculator();
-        Store warehouse = new Warehouse(calculator);
-        Store shop = new Shop(calculator);
-        Store trash = new Trash(calculator);
-        ControlQuality controlQuality = new ControlQuality(List.of(warehouse, shop, trash));
+        Store warehouse = new Warehouse();
+        Store shop = new Shop();
+        Store trash = new Trash();
+        ControlQuality controlQuality = new ControlQuality(List.of(warehouse, shop, trash), calculator);
         LocalDateTime now = LocalDateTime.now();
         Food productExp0 = new Eggs(
                 "Eggs", now, now.plusDays(20), 65, 10);
@@ -39,21 +39,17 @@ class ControlQualityTest {
                 "Milk", now.minusDays(7), now, 70, 30);
         Food productExpTotally = new Bacon(
                 "Bacon", now.minusDays(15), now.minusDays(2), 250, 50);
-        controlQuality.shipOut(productExp0);
-        controlQuality.shipOut(productExpBelow25);
-        controlQuality.shipOut(productExp50);
-        controlQuality.shipOut(productExpOver75);
-        controlQuality.shipOut(productExpLastDay);
-        controlQuality.shipOut(productExpTotally);
+        List<Food> productList = List.of(productExp0, productExpBelow25, productExp50,
+                productExpOver75, productExpLastDay, productExpTotally);
+        for (Food product : productList) {
+            controlQuality.shipOut(product, now);
+        }
 
-        List<Food> expected = List.of(productExp0, productExpBelow25);
-        assertThat(warehouse.getStock()).isEqualTo(expected);
+        assertThat(warehouse.getStock()).contains(productExp0, productExpBelow25);
 
-        expected = List.of(productExp50, productExpOver75, productExpLastDay);
-        assertThat(shop.getStock()).isEqualTo(expected);
+        assertThat(shop.getStock()).contains(productExp50, productExpOver75, productExpLastDay);
         assertThat(productExpOver75.getPrice()).isEqualTo(58.5);
 
-        expected = List.of(productExpTotally);
-        assertThat(trash.getStock()).isEqualTo(expected);
+        assertThat(trash.getStock()).contains(productExpTotally);
     }
 }

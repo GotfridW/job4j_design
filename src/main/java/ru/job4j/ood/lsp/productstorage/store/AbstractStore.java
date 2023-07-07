@@ -6,6 +6,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public abstract class AbstractStore implements Store {
+    protected static final int WAREHOUSE_THRESHOLD = 25;
+    protected static final int DISCOUNT_THRESHOLD = 75;
+    protected static final int EXPIRED_THRESHOLD = 100;
     private final List<Food> stock = new ArrayList<>();
 
     protected abstract boolean complies(Food product);
