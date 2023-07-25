@@ -5,6 +5,21 @@ import ru.job4j.ood.lsp.parking.model.Vehicle;
 import java.util.List;
 
 public class CarAndTruckParkingLot implements ParkingLot {
+    private final int carSpaces;
+    private final int truckSpaces;
+
+    public CarAndTruckParkingLot(int carSpaces, int truckSpaces) {
+        this.carSpaces = carSpaces;
+        this.truckSpaces = truckSpaces;
+    }
+
+    public int getCarSpaces() {
+        return carSpaces;
+    }
+
+    public int getTruckSpaces() {
+        return truckSpaces;
+    }
 
     @Override
     public boolean add(Vehicle vehicle) {
@@ -20,4 +35,6 @@ public class CarAndTruckParkingLot implements ParkingLot {
     public List<Vehicle> getAllVehicles() {
         return null;
     }
+
+
 }
