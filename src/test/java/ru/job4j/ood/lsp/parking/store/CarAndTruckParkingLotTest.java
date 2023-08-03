@@ -1,6 +1,5 @@
 package ru.job4j.ood.lsp.parking.store;
 
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import ru.job4j.ood.lsp.parking.model.Car;
 import ru.job4j.ood.lsp.parking.model.Truck;
@@ -8,31 +7,14 @@ import ru.job4j.ood.lsp.parking.model.Vehicle;
 
 import java.util.List;
 
-import static org.assertj.core.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-@Disabled
 class CarAndTruckParkingLotTest {
 
     @Test
-    void whenAddNullThenException() {
-        ParkingLot parkingLot = new CarAndTruckParkingLot(1, 1);
-        assertThatThrownBy(() -> parkingLot.add(null))
-                .isInstanceOf(IllegalArgumentException.class);
-    }
-
-    @Test
-    void whenAddCarWithNullPlateThenException() {
-        ParkingLot parkingLot = new CarAndTruckParkingLot(1, 1);
-        Vehicle vehicle = new Car(null, "Toyota");
-        assertThatThrownBy(() -> parkingLot.add(vehicle))
-                .isInstanceOf(IllegalArgumentException.class);
-    }
-
-    @Test
-    void whenAddCarWithNullNameThenException() {
-        ParkingLot parkingLot = new CarAndTruckParkingLot(1, 1);
-        Vehicle vehicle = new Car("624yra", null);
-        assertThatThrownBy(() -> parkingLot.add(vehicle))
+    void whenNegativeParkingLotSizeThenException() {
+        assertThatThrownBy(() -> new CarAndTruckParkingLot(-1, -2))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 

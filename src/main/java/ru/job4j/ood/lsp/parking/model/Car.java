@@ -6,4 +6,9 @@ public class Car extends Vehicle {
     public Car(String licencePlate, String model) {
         super(licencePlate, model);
     }
+
+    @Override
+    public int getSize() {
+        return SIZE;
+    }
 }

@@ -13,7 +13,19 @@ public abstract class Vehicle {
     private final String model;
 
     public Vehicle(String licencePlate, String model) {
+        validate(licencePlate, model);
         this.licencePlate = licencePlate;
         this.model = model;
     }
+
+    private void validate(String licencePlate, String model) {
+        if (licencePlate == null) {
+            throw new IllegalArgumentException("Invalid input for licence plate");
+        }
+        if (model == null) {
+            throw new IllegalArgumentException("Invalid input for model");
+        }
+    }
+
+    public abstract int getSize();
 }
