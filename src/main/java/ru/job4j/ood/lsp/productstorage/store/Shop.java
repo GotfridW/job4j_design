@@ -10,9 +10,10 @@ public class Shop extends AbstractStore {
     }
 
     private void applyDiscount(Food product) {
-        if (product.getExpiryLevel() > DISCOUNT_THRESHOLD) {
+        if (!product.isDiscountApplied() && product.getExpiryLevel() > DISCOUNT_THRESHOLD) {
             double price = product.getPrice();
             product.setPrice(price - ((price / 100) * product.getDiscount()));
+            product.setDiscountApplied(true);
         }
     }
 

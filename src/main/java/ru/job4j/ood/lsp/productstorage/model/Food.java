@@ -13,6 +13,7 @@ public abstract class Food {
     private final LocalDateTime expiryDate;
     private double price;
     private int discount;
+    private boolean discountApplied;
     private float expiryLevel;
 
     public Food(String name, LocalDateTime createDate, LocalDateTime expiryDate,
