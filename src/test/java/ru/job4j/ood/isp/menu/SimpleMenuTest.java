@@ -1,5 +1,6 @@
 package ru.job4j.ood.isp.menu;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.io.ByteArrayOutputStream;
@@ -11,15 +12,21 @@ import static org.assertj.core.api.Assertions.*;
 class SimpleMenuTest {
 
     public static final ActionDelegate STUB_ACTION = System.out::println;
+    public Menu menu;
 
-    @Test
-    public void whenAddThenReturnSame() {
-        Menu menu = new SimpleMenu();
+    @BeforeEach
+    public void setUp() {
+        menu = new SimpleMenu();
         menu.add(Menu.ROOT, "Сходить в магазин", STUB_ACTION);
         menu.add(Menu.ROOT, "Покормить собаку", STUB_ACTION);
         menu.add("Сходить в магазин", "Купить продукты", STUB_ACTION);
         menu.add("Купить продукты", "Купить хлеб", STUB_ACTION);
         menu.add("Купить продукты", "Купить молоко", STUB_ACTION);
+
+    }
+
+    @Test
+    public void whenAddThenReturnSame() {
         assertThat(new Menu.MenuItemInfo("Сходить в магазин",
                 List.of("Купить продукты"), STUB_ACTION, "1."))
                 .isEqualTo(menu.select("Сходить в магазин").get());
@@ -36,22 +43,10 @@ class SimpleMenuTest {
 
     @Test
     public void whenAddToNonExistentItemThenFalse() {
-        Menu menu = new SimpleMenu();
-        menu.add(Menu.ROOT, "Сходить в магазин", STUB_ACTION);
-        menu.add(Menu.ROOT, "Покормить собаку", STUB_ACTION);
-        menu.add("Сходить в магазин", "Купить продукты", STUB_ACTION);
-        menu.add("Купить продукты", "Купить хлеб", STUB_ACTION);
-        menu.add("Купить продукты", "Купить молоко", STUB_ACTION);
         assertThat(menu.add("Сделать уроки", "Выучить стих", STUB_ACTION)).isFalse();
     }
     @Test
     public void whenSelectAction() {
-        Menu menu = new SimpleMenu();
-        menu.add(Menu.ROOT, "Сходить в магазин", STUB_ACTION);
-        menu.add(Menu.ROOT, "Покормить собаку", STUB_ACTION);
-        menu.add("Сходить в магазин", "Купить продукты", STUB_ACTION);
-        menu.add("Купить продукты", "Купить хлеб", STUB_ACTION);
-        menu.add("Купить продукты", "Купить молоко", STUB_ACTION);
         Menu.MenuItemInfo itemInfo = menu.select("Купить молоко").get();
         assertThat(itemInfo.getNumber()).isEqualTo("1.1.2.");
         assertThat(itemInfo.getChildren()).isEmpty();
@@ -59,12 +54,6 @@ class SimpleMenuTest {
 
     @Test
     public void whenPrintMenu() {
-        Menu menu = new SimpleMenu();
-        menu.add(Menu.ROOT, "Сходить в магазин", STUB_ACTION);
-        menu.add(Menu.ROOT, "Покормить собаку", STUB_ACTION);
-        menu.add("Сходить в магазин", "Купить продукты", STUB_ACTION);
-        menu.add("Купить продукты", "Купить хлеб", STUB_ACTION);
-        menu.add("Купить продукты", "Купить молоко", STUB_ACTION);
         MenuPrinter printer = new ConsoleMenuPrinter();
         ByteArrayOutputStream out = new ByteArrayOutputStream();
         System.setOut(new PrintStream(out));
