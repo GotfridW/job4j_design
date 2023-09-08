@@ -10,7 +10,7 @@ public class MatrixOutput {
                 array[i][j] = (i + 1) * (j + 1);
             }
         }
-        try (FileOutputStream out = new FileOutputStream("Matrix.txt")) {
+        try (FileOutputStream out = new FileOutputStream("data/matrix.txt")) {
             for (int[] i : array) {
                 for (int num : i) {
                     out.write(String.valueOf(num).getBytes());

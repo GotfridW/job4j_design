@@ -28,6 +28,6 @@ public class Analizy {
 
     public static void main(String[] args) {
         Analizy analysis = new Analizy();
-        analysis.unavailable("server.log", "unavailable.csv");
+        analysis.unavailable("data/server.log", "data/unavailable.csv");
     }
 }

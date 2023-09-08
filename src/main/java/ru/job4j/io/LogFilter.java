@@ -28,7 +28,7 @@ public class LogFilter {
 
     public static void main(String[] args) {
         LogFilter logFilter = new LogFilter();
-        List<String> log = logFilter.filter("log.txt");
+        List<String> log = logFilter.filter("data/log.txt");
         log.forEach(System.out::println);
         save(log, "404.txt");
     }

@@ -13,8 +13,8 @@ import java.util.Properties;
 import java.util.stream.Collectors;
 
 public class ImportDB {
-    private Properties cfg;
-    private String dump;
+    private final Properties cfg;
+    private final String dump;
 
     public ImportDB(Properties cfg, String dump) {
         this.cfg = cfg;
@@ -70,7 +70,7 @@ public class ImportDB {
                 .getResourceAsStream("spammer.properties")) {
             cfg.load(in);
         }
-        ImportDB db = new ImportDB(cfg, "dump.txt");
+        ImportDB db = new ImportDB(cfg, "data/dump.txt");
         db.save(db.load());
     }
 }
