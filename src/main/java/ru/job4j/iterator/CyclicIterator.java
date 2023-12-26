@@ -23,7 +23,7 @@ public class CyclicIterator<T> implements Iterator<T> {
         if (!hasNext()) {
             throw new NoSuchElementException();
         }
-        index = (index == data.size()) ? 0 : index;
+        index = index == data.size() ? 0 : index;
         return data.get(index++);
     }
 }
