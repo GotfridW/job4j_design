@@ -21,7 +21,8 @@ public class NonNullIterator implements Iterator<Integer> {
 
     @Override
     public boolean hasNext() {
-        return index < data.length && data[nextNonNull(index)] != null;
+        index = nextNonNull(index);
+        return index < data.length && data[index] != null;
     }
 
     @Override
@@ -29,7 +30,6 @@ public class NonNullIterator implements Iterator<Integer> {
         if (!hasNext()) {
             throw new NoSuchElementException();
         }
-        index = nextNonNull(index);
         return data[index++];
     }
 }
