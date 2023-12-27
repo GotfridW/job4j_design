@@ -12,17 +12,12 @@ public class NonNullIterator implements Iterator<Integer> {
         this.data = data;
     }
 
-    private int nextNonNull(int index) {
-        while (index < data.length - 1 && data[index] == null) {
-            index++;
-        }
-        return index;
-    }
-
     @Override
     public boolean hasNext() {
-        index = nextNonNull(index);
-        return index < data.length && data[index] != null;
+        while (index < data.length && data[index] == null) {
+            index++;
+        }
+        return index < data.length;
     }
 
     @Override
