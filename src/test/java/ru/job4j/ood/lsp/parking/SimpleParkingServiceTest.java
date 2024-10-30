@@ -10,7 +10,6 @@ import ru.job4j.ood.lsp.parking.store.ParkingLot;
 
 import static org.assertj.core.api.Assertions.*;
 
-
 class SimpleParkingServiceTest {
 
     @Test

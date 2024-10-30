@@ -45,6 +45,7 @@ class SimpleMenuTest {
     public void whenAddToNonExistentItemThenFalse() {
         assertThat(menu.add("Сделать уроки", "Выучить стих", STUB_ACTION)).isFalse();
     }
+
     @Test
     public void whenSelectAction() {
         Menu.MenuItemInfo itemInfo = menu.select("Купить молоко").get();

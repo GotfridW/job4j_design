@@ -33,10 +33,5 @@ class WarehouseTest {
         }
 
         assertThat(warehouse.getStock()).contains(productExp0, productExpUnder25);
-
-
-
-
     }
-
 }
