@@ -91,7 +91,6 @@ public class SimpleMenu implements Menu {
         }
     }
 
-
     private class DFSIterator implements Iterator<ItemInfo> {
 
         Deque<MenuItem> stack = new LinkedList<>();

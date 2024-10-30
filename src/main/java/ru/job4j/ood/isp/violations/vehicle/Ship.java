@@ -1,6 +1,5 @@
 package ru.job4j.ood.isp.violations.vehicle;
 
-
 public class Ship implements Vehicle {
     @Override
     public void drive() {

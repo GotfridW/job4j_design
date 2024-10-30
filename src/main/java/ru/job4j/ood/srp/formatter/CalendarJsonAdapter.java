@@ -16,7 +16,6 @@ public class CalendarJsonAdapter implements JsonSerializer<Calendar>, JsonDeseri
         return new JsonPrimitive(DATE_FORMAT.format(src.getTime()));
     }
 
-
     @Override
     public Calendar deserialize(JsonElement json, Type type, JsonDeserializationContext context)
             throws JsonParseException {

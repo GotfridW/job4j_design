@@ -47,7 +47,5 @@ public interface Menu extends Iterable<Menu.MenuItemInfo> {
         public String getNumber() {
             return number;
         }
-
-
     }
 }

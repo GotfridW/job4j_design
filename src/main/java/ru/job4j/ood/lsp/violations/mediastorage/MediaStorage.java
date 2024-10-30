@@ -23,6 +23,7 @@ public class MediaStorage {
         validateContaining(name);
         return files.get(name);
     }
+
     public void removeFile(String name) {
         files.remove(name);
     }

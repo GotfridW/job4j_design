@@ -32,6 +32,4 @@ public abstract class AbstractStore implements Store {
     public void clear() {
         stock.clear();
     }
-
-
 }

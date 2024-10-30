@@ -10,7 +10,10 @@ package ru.job4j.ood.isp.violations.vehicle;
 
 public interface Vehicle {
     void drive();
+
     void fly();
+
     void sail();
+
     void dive();
 }

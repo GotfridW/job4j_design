@@ -6,6 +6,8 @@ import java.util.List;
 
 public interface ParkingLot {
     boolean add(Vehicle vehicle);
+
     boolean delete(Vehicle vehicle);
+
     List<Vehicle> getAllVehicles();
 }

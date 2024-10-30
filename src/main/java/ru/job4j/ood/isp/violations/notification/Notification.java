@@ -8,7 +8,10 @@ WindowsNotifier, мы будем зависеть от всех членов и�
  */
 public interface Notification {
     boolean notifyViaDesktop(String message);
+
     boolean notifyViaSmartphone(String message);
+
     boolean notifyViaEmail(String message);
+
     boolean notifyViaBrowser(String message);
 }

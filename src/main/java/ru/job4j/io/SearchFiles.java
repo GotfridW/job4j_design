@@ -27,6 +27,4 @@ public class SearchFiles extends SimpleFileVisitor<Path> {
     public List<Path> getPaths() {
         return paths;
     }
-
-
 }

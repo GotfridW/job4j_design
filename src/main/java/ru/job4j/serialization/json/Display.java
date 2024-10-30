@@ -5,7 +5,6 @@ public class Display {
     private final String ratio;
     private final String resolution;
 
-
     public Display(double size, String ratio, String resolution) {
         this.size = size;
         this.ratio = ratio;

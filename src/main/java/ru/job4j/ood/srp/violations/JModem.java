@@ -15,7 +15,6 @@ public class JModem implements Modem {
         this.modem = modem;
     }
 
-
     @Override
     public void connect() {
     }

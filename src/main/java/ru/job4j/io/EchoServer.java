@@ -11,6 +11,7 @@ import java.net.Socket;
 
 public class EchoServer {
     private static final Logger LOG = LoggerFactory.getLogger(EchoServer.class.getName());
+
     public static void main(String[] args) {
         try (var server = new ServerSocket(9000)) {
             while (!server.isClosed()) {

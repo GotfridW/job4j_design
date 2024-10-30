@@ -11,6 +11,4 @@ public class Animal {
         this.weight = weight;
         this.habitat = habitat;
     }
-
-
 }

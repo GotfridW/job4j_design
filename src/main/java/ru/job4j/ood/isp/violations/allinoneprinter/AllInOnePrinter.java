@@ -12,6 +12,8 @@ import java.util.List;
 
 public interface AllInOnePrinter {
     void print(List<String> printList);
+
     void scan();
+
     void copy();
 }

@@ -64,6 +64,4 @@ public class CarAndTruckParkingLot implements ParkingLot {
         return Stream.concat(carList.stream(), truckList.stream())
                 .collect(Collectors.toList());
     }
-
-
 }

@@ -6,6 +6,8 @@ import java.util.List;
 
 public interface Store {
     boolean add(Food product);
+
     List<Food> getStock();
+
     void clear();
 }
