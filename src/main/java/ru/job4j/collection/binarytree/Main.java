@@ -8,7 +8,7 @@ public class Main {
             bst.put(i);
         }
         System.out.println(bst);
-    //    System.out.println(bst.remove(10));
+        System.out.println(bst.remove(10));
         System.out.println("После удаления узла 10 :");
         System.out.println(bst);
     }
