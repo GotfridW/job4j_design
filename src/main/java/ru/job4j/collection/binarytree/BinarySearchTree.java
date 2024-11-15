@@ -128,6 +128,24 @@ public class BinarySearchTree<T extends Comparable<T>> {
         return node;
     }
 
+    public void clear() {
+        Node node = root;
+        clear(node);
+        root = null;
+    }
+
+    private void clear(Node node) {
+        if (Objects.nonNull(node.left)) {
+            clear(node.left);
+        }
+        if (Objects.nonNull(node.right)) {
+            clear(node.right);
+        }
+        node.key = null;
+        node.left = null;
+        node.right = null;
+    }
+
     public List<T> inSymmetricalOrder() {
         List<T> result = new ArrayList<>();
         Node node = root;

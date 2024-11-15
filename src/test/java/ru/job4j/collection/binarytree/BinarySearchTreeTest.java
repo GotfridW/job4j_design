@@ -1,5 +1,6 @@
 package ru.job4j.collection.binarytree;
 
+import org.assertj.core.api.SoftAssertions;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
@@ -119,5 +120,16 @@ class BinarySearchTreeTest {
         BinarySearchTree<Integer> tree = new BinarySearchTree<>();
         Arrays.stream(new int[]{4, 2, 6, 3, 5, 7, 1}).forEach(tree::put);
         assertThat(tree.remove(9)).isFalse();
+    }
+
+    @Test
+    void whenClearTreeThenOk() {
+        BinarySearchTree<Integer> tree = new BinarySearchTree<>();
+        int[] input = new int[]{4, 2, 6, 3, 5, 7, 1};
+        Arrays.stream(input).forEach(tree::put);
+        tree.clear();
+        SoftAssertions softly = new SoftAssertions();
+        Arrays.stream(input).forEach(i -> softly.assertThat(tree.contains(i)).isFalse());
+        softly.assertAll();
     }
 }
