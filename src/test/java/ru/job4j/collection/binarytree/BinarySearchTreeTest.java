@@ -2,6 +2,8 @@ package ru.job4j.collection.binarytree;
 
 import org.junit.jupiter.api.Test;
 
+import java.util.Arrays;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
 class BinarySearchTreeTest {
@@ -96,5 +98,26 @@ class BinarySearchTreeTest {
         }
         assertThat(tree.inPostOrder()).hasSize(7)
                 .containsExactly(1, 3, 2, 5, 7, 6, 4);
+    }
+
+    @Test
+    void whenRemoveRootThenOk() {
+        BinarySearchTree<Integer> tree = new BinarySearchTree<>();
+        Arrays.stream(new int[]{4, 2, 6, 3, 5, 7, 1}).forEach(tree::put);
+        assertThat(tree.remove(4)).isTrue();
+    }
+
+    @Test
+    void whenRemoveNodeWithChildrenThenOk() {
+        BinarySearchTree<Integer> tree = new BinarySearchTree<>();
+        Arrays.stream(new int[]{4, 2, 6, 3, 5, 7, 1}).forEach(tree::put);
+        assertThat(tree.remove(2)).isTrue();
+    }
+
+    @Test
+    void whenRemoveNonExistingNodeThenFalse() {
+        BinarySearchTree<Integer> tree = new BinarySearchTree<>();
+        Arrays.stream(new int[]{4, 2, 6, 3, 5, 7, 1}).forEach(tree::put);
+        assertThat(tree.remove(9)).isFalse();
     }
 }
