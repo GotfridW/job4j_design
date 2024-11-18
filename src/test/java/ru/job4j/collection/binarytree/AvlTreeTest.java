@@ -73,4 +73,11 @@ class AvlTreeTest {
         Arrays.stream(new int[]{1, 2, 3, 4, 5, 6, 7, 8}).forEach(tree::insert);
         assertThat(tree.inPostOrder()).containsExactly(1, 3, 2, 5, 8, 7, 6, 4);
     }
+
+    @Test
+    void whenRemove() {
+        AvlTree<Integer> tree = new AvlTree<>();
+        Arrays.stream(new int[]{1, 2, 3, 4}).forEach(tree::insert);
+        assertThat(tree.remove(3)).isTrue();
+    }
 }
